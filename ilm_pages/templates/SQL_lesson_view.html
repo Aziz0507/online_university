@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SQL_lesson_view</title>
+</head>
+<body>
+	<p>{{sql}}</p>
+
+	{% for i in sql %}
+		<p>{{i}}</p>
+		<p>{{i.info}}</p>
+		<p>{{ i.Moduls_type_id }}</p>
+		<p>{{ i.them_video }}</p>
+		<p>lesson_type:{{ i.lesson_type_id }}</p>
+	{% endfor %}
+</body>
+</html>
