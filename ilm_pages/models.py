@@ -1,5 +1,7 @@
 from django.db import models
 from embed_video.fields import EmbedVideoField
+from PIL import Image
+
 
 
 
@@ -14,6 +16,16 @@ class Categories_models(models.Model):
 
 	def __str__(self):
 		return self.categoriy
+	
+	def save(self):
+		super().save()
+		img = Image.open(self.photo.path)
+
+		if img.height > 300 or img.width > 300:
+			output_size = (300, 300)
+			img.thumbnail(output_size)
+			img.save(self.photo.path)
+
 
 class Techer_models(models.Model):
 	teacher_name      = models.CharField(max_length = 50)
@@ -42,6 +54,15 @@ class lesson_models(models.Model):
 
 	def __str__(self):
 		return self.name
+	
+	def save(self):
+		super().save()
+		img = Image.open(self.photos.path)
+
+		if img.height > 300 or img.width > 300:
+			output_size = (300, 300)
+			img.thumbnail(output_size)
+			img.save(self.photos.path)
 
 class Moduls_models(models.Model):
 	lesson_type = models.ForeignKey(lesson_models, on_delete = models.CASCADE)
